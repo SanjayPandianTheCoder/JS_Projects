@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-lock"></i> Secure Password Generator</h1>
+        </div>
+
+        <div class="content">
+            <div class="password-display">
+                <input type="text" id="passwordTextField" readonly placeholder="Your password will appear here">
+                <button class="copy-btn" id="copyPasswordButton">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+
+            <div class="settings">
+                <h2><i class="fas fa-sliders-h"></i> Password Settings</h2>
+
+                <div class="setting-group-container">
+                    <div class="setting-group">
+                        <label for="passwordLengthField">Password Length: <span class="slider-value"
+                                id="lengthValue">8</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="passwordLengthField" min="6" max="30" value="8">
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="noOfUpperCaseField">Min Uppercase Letters: <span class="slider-value"
+                                id="upperValue">2</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="noOfUpperCaseField" min="0" max="10" value="2">
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="noOfLowerCaseField">Min Lowercase Letters: <span class="slider-value"
+                                id="lowerValue">2</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="noOfLowerCaseField" min="0" max="10" value="2">
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="noOfDigitsField">Min Numbers: <span class="slider-value"
+                                id="digitValue">2</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="noOfDigitsField" min="0" max="10" value="2">
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="noOfSymbolsField">Min Symbols: <span class="slider-value"
+                                id="symbolValue">2</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="noOfSymbolsField" min="0" max="10" value="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="password-strength">
+                <h3>Password Strength: <span id="strengthText">None</span></h3>
+                <div class="strength-meter">
+                    <div class="strength-fill" id="strengthMeter"></div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-generate" id="generatePasswordButton">
+                    <i class="fas fa-key"></i> Generate Password
+                </button>
+                <button class="btn btn-reset" id="resetButton">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+
+            <div class="requirements">
+                <h3><i class="fas fa-info-circle"></i> Password Requirements</h3>
+                <ul>
+                    <li>Minimum length: 6 characters</li>
+                    <li>Maximum length: 30 characters</li>
+                    <li>Use a mix of uppercase and lowercase letters</li>
+                    <li>Include numbers and symbols for stronger passwords</li>
+                    <li>Avoid common words or personal information</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert-container"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="source.js"></script>
+</body>
+
+</html>
