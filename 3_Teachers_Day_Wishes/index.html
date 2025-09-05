@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Teacher's Day</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 1;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+  
+
+    .header {
+      margin-bottom: 25px;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: #6a11cb;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .icon-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .icon:hover {
+      transform: scale(1.1) rotate(10deg);
+    }
+
+    .message {
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    .highlight {
+      color: #2575fc;
+      font-weight: 600;
+    }
+
+    .btn {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(106, 17, 203, 0.6);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #f5f5f5;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .modal-title {
+      color: #6a11cb;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .modal-message {
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    .signature {
+      margin-top: 20px;
+      font-style: italic;
+      color: #6a11cb;
+      font-weight: 500;
+    }
+
+    @media (max-width: 576px) {
+      .card {
+        padding: 30px 20px;
+      }
+      
+      .title {
+        font-size: 2rem;
+      }
+      
+      .icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti-container" id="confetti-container"></div>
+  
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h1 class="title">Happy Teacher's Day</h1>
+        <p class="subtitle">A special tribute to our guiding stars</p>
+      </div>
+      
+      <div class="icon-container">
+        <div class="icon"><i class="fas fa-book"></i></div>
+        <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+      </div>
+      
+      <p class="message">Dear <span class="highlight">Teacher</span>, your dedication, wisdom, and kindness have been a beacon of light in my educational journey. You've not only taught lessons from books but also valuable lessons for life.</p>
+      
+      <button class="btn" id="openModal">
+        <i class="fas fa-envelope-open-text"></i> Read Special Message
+      </button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-close" id="closeModal">
+        <i class="fas fa-times"></i>
+      </div>
+      <h3 class="modal-title"><i class="fas fa-heart"></i> Thank You, Dear Teacher</h3>
+      <p class="modal-message">
+        You are more than an educator—you are a mentor, guide, and inspiration. Your patience and dedication have shaped minds and touched hearts. You've shown us that learning is a lifelong adventure and that curiosity is the greatest gift.
+        <br><br>
+        Today we celebrate you and all the teachers who make a difference every day. Your influence extends far beyond the classroom walls and will continue to guide us in all our future endeavors.
+      </p>
+      <p class="signature">With gratitude and respect,<br>Your Student</p>
+    </div>
+  </div>
+
+  <script>
+    // Create confetti
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti-container');
+      const colors = ['#6a11cb', '#2575fc', '#ff6b6b', '#ffc107', '#4caf50', '#ff4081', '#00bcd4'];
+      const confettiCount = 150;
+      
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = Math.random() * 10 + 5;
+        const posX = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 5 + 5;
+        
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        confetti.style.backgroundColor = color;
+        confetti.style.left = `${posX}%`;
+        confetti.style.animationDelay = `${delay}s`;
+        confetti.style.animationDuration = `${duration}s`;
+        
+        // Random shapes
+        if (Math.random() > 0.5) {
+          confetti.style.borderRadius = '50%';
+        }
+        
+        confettiContainer.appendChild(confetti);
+        
+        // Remove confetti after animation completes
+        setTimeout(() => {
+          confetti.remove();
+        }, (delay + duration) * 1000);
+      }
+    }
+    
+    // Continuously create confetti
+    function startConfetti() {
+      createConfetti();
+      setInterval(createConfetti, 4000);
+    }
+    
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const openModalBtn = document.getElementById('openModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    
+    openModalBtn.addEventListener('click', () => {
+      modal.classList.add('active');
+    });
+    
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+    
+    // Initialize
+    window.addEventListener('load', () => {
+      startConfetti();
+    });
+  </script>
+</body>
+</html>
